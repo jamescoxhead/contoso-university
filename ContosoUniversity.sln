@@ -1,0 +1,51 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34511.84
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Source", "Source", "{BFD3A38E-0E9C-46B4-9BEE-505E73961750}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{2E10BAFC-3D41-4A75-95E8-AD051C495D4E}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		.gitattributes = .gitattributes
+		.gitignore = .gitignore
+		coverlet.runsettings = coverlet.runsettings
+		Directory.Build.props = Directory.Build.props
+		Directory.Packages.props = Directory.Packages.props
+		LICENSE = LICENSE
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContosoUniversity.Web", "Source\ContosoUniversity.Web\ContosoUniversity.Web.csproj", "{8A51AA66-9E98-48DE-9BC2-21F63AD162BA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{04A8CD68-3A53-44B5-9064-0185299FDA4D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContosoUniversity.Web.UnitTests", "Tests\ContosoUniversity.Web.UnitTests\ContosoUniversity.Web.UnitTests.csproj", "{F0797E4A-8D35-44B8-9ED8-8E99096A6BD1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8A51AA66-9E98-48DE-9BC2-21F63AD162BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A51AA66-9E98-48DE-9BC2-21F63AD162BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A51AA66-9E98-48DE-9BC2-21F63AD162BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A51AA66-9E98-48DE-9BC2-21F63AD162BA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F0797E4A-8D35-44B8-9ED8-8E99096A6BD1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F0797E4A-8D35-44B8-9ED8-8E99096A6BD1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F0797E4A-8D35-44B8-9ED8-8E99096A6BD1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F0797E4A-8D35-44B8-9ED8-8E99096A6BD1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{8A51AA66-9E98-48DE-9BC2-21F63AD162BA} = {BFD3A38E-0E9C-46B4-9BEE-505E73961750}
+		{F0797E4A-8D35-44B8-9ED8-8E99096A6BD1} = {04A8CD68-3A53-44B5-9064-0185299FDA4D}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6E6775F8-5383-44D3-93BF-E35BEA666E77}
+	EndGlobalSection
+EndGlobal
