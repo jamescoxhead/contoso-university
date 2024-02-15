@@ -51,10 +51,10 @@ jobs:
           dotnet publish --configuration ${{env.BUILD_CONFIGURATON}} --self-contained --output ./publish
           cd publish
           zip -r ./publish.zip .
-        working-directory: ./src/${{env.PROJECT_NAME}}.Web
+        working-directory: ./Source/${{env.PROJECT_NAME}}.Web
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
           name: api
-          path: ./src/${{env.PROJECT_NAME}}.Web/publish/publish.zip
+          path: ./Source/${{env.PROJECT_NAME}}.Web/publish/publish.zip
