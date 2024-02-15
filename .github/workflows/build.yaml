@@ -1,0 +1,60 @@
+name: build
+
+on:
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - .editorconfig
+      - .gitattributes
+      - .gitignore
+      - README.md
+      - LICENCE
+
+env:
+  DOTNET_VERSION: 8.x
+  BUILD_CONFIGURATON: Release
+  PROJECT_NAME: ContosoUniversity
+
+jobs:
+  build:
+    runs-on: "ubuntu-latest"
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install .NET ${{env.DOTNET_VERSION}}
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: ${{env.DOTNET_VERSION}}
+
+      - name: Cache NuGet packages
+        uses: actions/cache@v4
+        with:
+          path: ~/.nuget/packages
+          key: ${{ runner.os }}-nuget-${{ hashFiles('**/*.csproj') }}
+          restore-keys: |
+            ${{ runner.os }}-nuget
+
+      - name: Restore NuGet packages
+        run: dotnet restore
+
+      - name: Build solution
+        run: dotnet build --configuration ${{env.BUILD_CONFIGURATON}} --no-restore
+
+      - name: Run tests
+        run: dotnet test --no-build --configuration ${{env.BUILD_CONFIGURATON}} --verbosity normal --settings coverlet.runsettings --results-directory ./coverage
+
+      - name: Publish Application
+        run: |
+          dotnet publish --configuration ${{env.BUILD_CONFIGURATON}} --self-contained --output ./publish
+          cd publish
+          zip -r ./publish.zip .
+        working-directory: ./src/${{env.PROJECT_NAME}}.Web
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: api
+          path: ./src/${{env.PROJECT_NAME}}.Web/publish/publish.zip
