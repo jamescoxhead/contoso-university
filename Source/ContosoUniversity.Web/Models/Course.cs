@@ -9,5 +9,5 @@ public class Course
     public required string Title { get; set; }
     public required int Credits { get; set; }
 
-    public ICollection<Enrollment>? Enrollments { get; set; }
+    public ICollection<Enrollment> Enrollments { get; set; } = new List<Enrollment>();
 }

@@ -19,7 +19,10 @@ public class DetailsModel(SchoolDbContext context) : PageModel
             return NotFound();
         }
 
-        var student = await _context.Students.FirstOrDefaultAsync(m => m.StudentId == id);
+        var student = await _context.Students.Include(student => student.Enrollments)
+                                             .ThenInclude(enrollment => enrollment.Course)
+                                             .AsNoTracking()
+                                             .FirstOrDefaultAsync(m => m.StudentId == id);
         if (student == null)
         {
             return NotFound();
@@ -28,6 +31,7 @@ public class DetailsModel(SchoolDbContext context) : PageModel
         {
             Student = student;
         }
+
         return Page();
     }
 }

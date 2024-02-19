@@ -9,7 +9,7 @@ public class IndexModel(SchoolDbContext context) : PageModel
 {
     private readonly SchoolDbContext _context = context;
 
-    public IList<Student> Student { get;set; } = default!;
+    public IList<Student> Student { get; set; } = default!;
 
     public async Task OnGetAsync() => Student = await _context.Students.ToListAsync();
 }

@@ -6,21 +6,24 @@ using ContosoUniversity.Web.Models;
 
 namespace ContosoUniversity.Web.Pages.Students;
 
-public class DeleteModel(SchoolDbContext context) : PageModel
+public class DeleteModel(SchoolDbContext context, ILogger<DeleteModel> logger) : PageModel
 {
     private readonly SchoolDbContext _context = context;
+    private readonly ILogger<DeleteModel> _logger = logger;
 
     [BindProperty]
     public Student Student { get; set; } = default!;
+    public string ErrorMessage { get; set; } = string.Empty;
 
-    public async Task<IActionResult> OnGetAsync(int? id)
+    public async Task<IActionResult> OnGetAsync(int? id, bool? saveChangesError = false)
     {
         if (id == null)
         {
             return NotFound();
         }
 
-        var student = await _context.Students.FirstOrDefaultAsync(m => m.StudentId == id);
+        var student = await _context.Students.AsNoTracking()
+                                             .FirstOrDefaultAsync(m => m.StudentId == id);
 
         if (student == null)
         {
@@ -29,6 +32,11 @@ public class DeleteModel(SchoolDbContext context) : PageModel
         else
         {
             Student = student;
+        }
+
+        if (saveChangesError.GetValueOrDefault())
+        {
+            ErrorMessage = $"Delete {id} failed. Try again";
         }
 
         return Page();
@@ -42,13 +50,21 @@ public class DeleteModel(SchoolDbContext context) : PageModel
         }
 
         var student = await _context.Students.FindAsync(id);
-        if (student != null)
+        if (student == null)
         {
-            Student = student;
-            _context.Students.Remove(Student);
-            await _context.SaveChangesAsync();
+            return NotFound();
         }
 
-        return RedirectToPage("./Index");
+        try
+        {
+            _context.Students.Remove(student);
+            await _context.SaveChangesAsync();
+            return RedirectToPage("./Index");
+        }
+        catch (DbUpdateException ex)
+        {
+            _logger.LogError(ex, "Delete {Id} failed. Try again", id);
+            return RedirectToAction("./Delete", new { id, saveChangesError = true });
+        }
     }
 }

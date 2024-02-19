@@ -14,7 +14,6 @@ public class CreateModel(SchoolDbContext context) : PageModel
     [BindProperty]
     public Student Student { get; set; } = default!;
 
-    // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
     public async Task<IActionResult> OnPostAsync()
     {
         if (!ModelState.IsValid)
@@ -22,9 +21,15 @@ public class CreateModel(SchoolDbContext context) : PageModel
             return Page();
         }
 
-        _context.Students.Add(Student);
-        await _context.SaveChangesAsync();
+        var createStudent = new Student { EnrollmentDate = DateTime.Now, FirstMidName = string.Empty, LastName = string.Empty };
 
-        return RedirectToPage("./Index");
+        if (await TryUpdateModelAsync(createStudent, "student", s => s.FirstMidName, s => s.LastName, s => s.EnrollmentDate))
+        {
+            _context.Students.Add(createStudent);
+            await _context.SaveChangesAsync();
+            return RedirectToPage("./Index");
+        }
+
+        return Page();
     }
 }

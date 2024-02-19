@@ -20,29 +20,37 @@ public class EditModel(SchoolDbContext context) : PageModel
             return NotFound();
         }
 
-        var student =  await _context.Students.FirstOrDefaultAsync(m => m.StudentId == id);
+        var student = await _context.Students.FindAsync(id);
         if (student == null)
         {
             return NotFound();
         }
+
         Student = student;
         return Page();
     }
 
-    // To protect from overposting attacks, enable the specific properties you want to bind to.
-    // For more details, see https://aka.ms/RazorPagesCRUD.
-    public async Task<IActionResult> OnPostAsync()
+    public async Task<IActionResult> OnPostAsync(int id)
     {
         if (!ModelState.IsValid)
         {
             return Page();
         }
 
-        _context.Attach(Student).State = EntityState.Modified;
+        var updateStudent = await _context.Students.FindAsync(id);
+
+        if (updateStudent == null)
+        {
+            return NotFound();
+        }
 
         try
         {
-            await _context.SaveChangesAsync();
+            if (await TryUpdateModelAsync(updateStudent, "student", s => s.FirstMidName, s => s.LastName, s => s.EnrollmentDate))
+            {
+                await _context.SaveChangesAsync();
+                return RedirectToPage("./Index");
+            }
         }
         catch (DbUpdateConcurrencyException)
         {
