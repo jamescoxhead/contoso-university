@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using ContosoUniversity.Web.Data;
-using ContosoUniversity.Web.Models;
+using ContosoUniversity.Web.Models.Entities;
 
 namespace ContosoUniversity.Web.Pages.Students;
 

@@ -1,4 +1,4 @@
-using ContosoUniversity.Web.Models;
+using ContosoUniversity.Web.Models.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace ContosoUniversity.Web.Data;

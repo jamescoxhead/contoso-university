@@ -1,0 +1,22 @@
+@page
+@model ContosoUniversity.Web.Pages.AboutModel
+@{
+    ViewData["Title"] = "Student Body Statistics";
+}
+
+<h1>Student Body Statistics</h1>
+
+<table>
+    <tr>
+        <th>Enrollment Date</th>
+        <th>Students</th>
+    </tr>
+
+    @foreach (var item in Model.EnrollmentData)
+    {
+        <tr>
+            <td>@Html.DisplayFor(modelItem => item.EnrollmentDate)</td>
+            <td>@item.StudentCount</td>
+        </tr>
+    }
+</table>
