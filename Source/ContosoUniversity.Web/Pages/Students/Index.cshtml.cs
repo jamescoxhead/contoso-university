@@ -16,7 +16,7 @@ public class IndexModel(SchoolDbContext context, IConfiguration configuration) :
     public string CurrentFilter { get; set; } = string.Empty;
     public string CurrentSort { get; set; } = string.Empty;
 
-    public PaginatedList<Student> Students { get; set; } = new(new List<Student>(), 0, 1, 1);
+    public PaginatedList<Student> Students { get; set; } = new([], 0, 1, 1);
 
     public async Task OnGetAsync(string sortOrder, string currentFilter, string searchString, int? pageIndex)
     {

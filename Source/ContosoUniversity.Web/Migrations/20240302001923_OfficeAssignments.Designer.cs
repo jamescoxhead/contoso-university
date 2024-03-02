@@ -4,6 +4,7 @@ using ContosoUniversity.Web.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ContosoUniversity.Web.Migrations
 {
     [DbContext(typeof(SchoolDbContext))]
-    partial class SchoolDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240302001923_OfficeAssignments")]
+    partial class OfficeAssignments
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -30,9 +33,6 @@ namespace ContosoUniversity.Web.Migrations
                     b.Property<int>("Credits")
                         .HasColumnType("int");
 
-                    b.Property<int>("DepartmentId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -40,38 +40,7 @@ namespace ContosoUniversity.Web.Migrations
 
                     b.HasKey("CourseId");
 
-                    b.HasIndex("DepartmentId");
-
                     b.ToTable("Courses");
-                });
-
-            modelBuilder.Entity("ContosoUniversity.Web.Models.Entities.Department", b =>
-                {
-                    b.Property<int>("DepartmentId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("DepartmentId"));
-
-                    b.Property<decimal>("Budget")
-                        .HasColumnType("money");
-
-                    b.Property<int?>("InstructorId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<DateTime>("StartDate")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("DepartmentId");
-
-                    b.HasIndex("InstructorId");
-
-                    b.ToTable("Departments");
                 });
 
             modelBuilder.Entity("ContosoUniversity.Web.Models.Entities.Enrollment", b =>
@@ -184,26 +153,6 @@ namespace ContosoUniversity.Web.Migrations
                     b.ToTable("CourseInstructor");
                 });
 
-            modelBuilder.Entity("ContosoUniversity.Web.Models.Entities.Course", b =>
-                {
-                    b.HasOne("ContosoUniversity.Web.Models.Entities.Department", "Department")
-                        .WithMany("Courses")
-                        .HasForeignKey("DepartmentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Department");
-                });
-
-            modelBuilder.Entity("ContosoUniversity.Web.Models.Entities.Department", b =>
-                {
-                    b.HasOne("ContosoUniversity.Web.Models.Entities.Instructor", "Administrator")
-                        .WithMany()
-                        .HasForeignKey("InstructorId");
-
-                    b.Navigation("Administrator");
-                });
-
             modelBuilder.Entity("ContosoUniversity.Web.Models.Entities.Enrollment", b =>
                 {
                     b.HasOne("ContosoUniversity.Web.Models.Entities.Course", "Course")
@@ -252,11 +201,6 @@ namespace ContosoUniversity.Web.Migrations
             modelBuilder.Entity("ContosoUniversity.Web.Models.Entities.Course", b =>
                 {
                     b.Navigation("Enrollments");
-                });
-
-            modelBuilder.Entity("ContosoUniversity.Web.Models.Entities.Department", b =>
-                {
-                    b.Navigation("Courses");
                 });
 
             modelBuilder.Entity("ContosoUniversity.Web.Models.Entities.Instructor", b =>
