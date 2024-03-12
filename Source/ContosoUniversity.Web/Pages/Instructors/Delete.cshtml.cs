@@ -40,13 +40,22 @@ public class DeleteModel(SchoolDbContext context) : PageModel
             return NotFound();
         }
 
-        var instructor = await _context.Instructors.FindAsync(id);
-        if (instructor != null)
+        Instructor instructor = await _context.Instructors
+                .Include(i => i.Courses)
+                .SingleAsync(i => i.InstructorId == id);
+
+        if (instructor == null)
         {
-            Instructor = instructor;
-            _context.Instructors.Remove(Instructor);
-            await _context.SaveChangesAsync();
+            return RedirectToPage("./Index");
         }
+
+        var departments = await _context.Departments
+                .Where(d => d.InstructorId == id)
+                .ToListAsync();
+        departments.ForEach(d => d.InstructorId = null);
+
+        _context.Instructors.Remove(instructor);
+        await _context.SaveChangesAsync();
 
         return RedirectToPage("./Index");
     }

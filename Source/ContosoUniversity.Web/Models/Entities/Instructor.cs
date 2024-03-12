@@ -27,5 +27,5 @@ public class Instructor
     public string FullName => LastName + ", " + FirstMidName;
 
     public ICollection<Course> Courses { get; set; } = new List<Course>();
-    public OfficeAssignment OfficeAssignment { get; set; } = default!;
+    public OfficeAssignment? OfficeAssignment { get; set; } = default!;
 }
