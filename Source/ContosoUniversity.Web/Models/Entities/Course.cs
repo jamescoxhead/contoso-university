@@ -13,7 +13,9 @@ public class Course
     public required string Title { get; set; }
 
     [Range(0, 5)]
-    public required int Credits { get; set; }
+    public int Credits { get; set; }
+
+    public int DepartmentId { get; set; }
 
     public Department Department { get; set; } = default!;
     public ICollection<Enrollment> Enrollments { get; set; } = new List<Enrollment>();

@@ -20,7 +20,9 @@ public class DeleteModel(SchoolDbContext context) : PageModel
             return NotFound();
         }
 
-        var course = await _context.Courses.FirstOrDefaultAsync(m => m.CourseId == id);
+        var course = await _context.Courses.AsNoTracking()
+                                           .Include(c => c.Department)
+                                           .FirstOrDefaultAsync(m => m.CourseId == id);
 
         if (course == null)
         {
@@ -30,6 +32,7 @@ public class DeleteModel(SchoolDbContext context) : PageModel
         {
             Course = course;
         }
+
         return Page();
     }
 

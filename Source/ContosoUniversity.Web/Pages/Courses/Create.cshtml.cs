@@ -1,15 +1,18 @@
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 using ContosoUniversity.Web.Models.Entities;
 using ContosoUniversity.Web.Data;
 
 namespace ContosoUniversity.Web.Pages.Courses;
 
-public class CreateModel(SchoolDbContext context) : PageModel
+public class CreateModel(SchoolDbContext context) : BaseCoursePageModel
 {
     private readonly SchoolDbContext _context = context;
 
-    public IActionResult OnGet() => Page();
+    public IActionResult OnGet()
+    {
+        PopulateDepartmentSelectList(_context);
+        return Page();
+    }
 
     [BindProperty]
     public Course Course { get; set; } = default!;
@@ -19,12 +22,26 @@ public class CreateModel(SchoolDbContext context) : PageModel
     {
         if (!ModelState.IsValid)
         {
+            PopulateDepartmentSelectList(_context);
             return Page();
         }
 
-        _context.Courses.Add(Course);
-        await _context.SaveChangesAsync();
+        var createCourse = new Course { Title = string.Empty};
 
-        return RedirectToPage("./Index");
+        if (await TryUpdateModelAsync(createCourse,
+                                      "course",
+                                      s => s.CourseId,
+                                      s => s.DepartmentId,
+                                      s => s.Title,
+                                      s => s.Credits))
+        {
+            _context.Courses.Add(Course);
+            await _context.SaveChangesAsync();
+
+            return RedirectToPage("./Index");
+        }
+
+        PopulateDepartmentSelectList(_context, createCourse.DepartmentId);
+        return Page();
     }
 }
