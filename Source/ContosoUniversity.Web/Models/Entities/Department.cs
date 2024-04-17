@@ -23,7 +23,7 @@ public class Department
     public int? InstructorId { get; set; }
 
     [Timestamp]
-    public byte[] RowVersion { get; set; }
+    public byte[] RowVersion { get; set; } = default!;
 
     public Instructor Administrator { get; set; } = default!;
     public ICollection<Course> Courses { get; set; } = new List<Course>();

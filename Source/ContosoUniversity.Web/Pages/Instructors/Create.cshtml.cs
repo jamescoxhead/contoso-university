@@ -2,13 +2,14 @@ using Microsoft.AspNetCore.Mvc;
 using ContosoUniversity.Web.Models.Entities;
 using ContosoUniversity.Web.Data;
 using Microsoft.EntityFrameworkCore;
+using System.Globalization;
 
 namespace ContosoUniversity.Web.Pages.Instructors;
 
 public class CreateModel(SchoolDbContext context, ILogger<CreateModel> logger) : BaseInstructorPageModel
 {
     private readonly SchoolDbContext _context = context;
-    private readonly ILogger<CreateModel> _logger;
+    private readonly ILogger<CreateModel> _logger = logger;
 
     [BindProperty]
     public Instructor Instructor { get; set; } = default!;
@@ -45,7 +46,7 @@ public class CreateModel(SchoolDbContext context, ILogger<CreateModel> logger) :
 
         foreach (var course in selectedCourses)
         {
-            var foundCourse = await _context.Courses.FindAsync(int.Parse(course));
+            var foundCourse = await _context.Courses.FindAsync(int.Parse(course, CultureInfo.InvariantCulture));
             if (foundCourse != null)
             {
                 createInstructor.Courses.Add(foundCourse);

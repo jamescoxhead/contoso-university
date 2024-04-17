@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using ContosoUniversity.Web.Models.Entities;
 using ContosoUniversity.Web.Data;
+using System.Globalization;
 
 namespace ContosoUniversity.Web.Pages.Instructors;
 
@@ -44,6 +44,7 @@ public class EditModel(SchoolDbContext context) : BaseInstructorPageModel
         {
             return Page();
         }
+
         if (id == null)
         {
             return NotFound();
@@ -96,7 +97,7 @@ public class EditModel(SchoolDbContext context) : BaseInstructorPageModel
 
         foreach (var course in _context.Courses)
         {
-            if (selectedCoursesHS.Contains(course.CourseId.ToString()))
+            if (selectedCoursesHS.Contains(course.CourseId.ToString(CultureInfo.InvariantCulture)))
             {
                 if (!instructorCourses.Contains(course.CourseId))
                 {

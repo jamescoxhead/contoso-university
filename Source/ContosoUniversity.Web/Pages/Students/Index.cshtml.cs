@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using ContosoUniversity.Web.Data;
 using ContosoUniversity.Web.Models.Entities;
 using ContosoUniversity.Web.Models.ViewModels;
+using ContosoUniversity.Web.ExtensionMethods;
 
 namespace ContosoUniversity.Web.Pages.Students;
 
@@ -22,7 +23,7 @@ public class IndexModel(SchoolDbContext context, IConfiguration configuration) :
     {
         CurrentSort = sortOrder;
         NameSort = string.IsNullOrEmpty(sortOrder) ? "name_desc" : string.Empty;
-        DateSort = !string.IsNullOrEmpty(sortOrder) && sortOrder.ToLowerInvariant() == "date" ? "date_desc" : "Date";
+        DateSort = !string.IsNullOrEmpty(sortOrder) && sortOrder.ToLowerInvariant().Equals("date", StringComparison.OrdinalIgnoreCase) ? "date_desc" : "Date";
         CurrentFilter = searchString;
 
         if (searchString != null)
@@ -52,6 +53,6 @@ public class IndexModel(SchoolDbContext context, IConfiguration configuration) :
         };
 
         var pageSize = _configuration.GetValue("ContosoUniversity:PageSize", 4);
-        Students = await PaginatedList<Student>.CreateAsync(studentsQuery.AsNoTracking(), pageIndex ?? 1, pageSize);
+        Students = await studentsQuery.AsNoTracking().ToPaginatedList(pageIndex ?? 1, pageSize);
     }
 }
