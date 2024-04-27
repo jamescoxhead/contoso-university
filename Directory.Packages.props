@@ -4,15 +4,24 @@
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
   </PropertyGroup>
   <ItemGroup>
+    <PackageVersion Include="AutoFixture.NUnit3" Version="4.18.1" />
+    <PackageVersion Include="FluentAssertions" Version="6.12.0" />
+    <PackageVersion Include="FluentAssertions.Analyzers" Version="0.31.0" />
     <PackageVersion Include="Microsoft.AspNetCore.Components.QuickGrid.EntityFrameworkAdapter" Version="8.0.3" />
     <PackageVersion Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="8.0.3" />
+    <PackageVersion Include="Microsoft.Data.Sqlite.Core" Version="8.0.4" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.4" />
     <PackageVersion Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.3" />
     <PackageVersion Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.3" />
+    <PackageVersion Include="Microsoft.Extensions.Configuration" Version="8.0.0" />
+    <PackageVersion Include="Microsoft.Extensions.Configuration.Binder" Version="8.0.1" />
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.9.0" />
     <PackageVersion Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.2" />
-    <PackageVersion Include="NUnit" Version="4.1.0" />
-    <PackageVersion Include="NUnit3TestAdapter" Version="4.5.0" />
-    <PackageVersion Include="NUnit.Analyzers" Version="4.1.0" />
+    <PackageVersion Include="MockQueryable.NSubstitute" Version="7.0.1" />
+    <PackageVersion Include="NSubstitute" Version="5.1.0" />
+    <PackageVersion Include="NUnit" Version="3.14.0" />
+    <PackageVersion Include="NUnit3TestAdapter" Version="3.17.0" />
+    <PackageVersion Include="NUnit.Analyzers" Version="3.10.0" />
     <PackageVersion Include="coverlet.collector" Version="6.0.2" />
   </ItemGroup>
 </Project>

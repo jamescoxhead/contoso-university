@@ -3,7 +3,7 @@ using ContosoUniversity.Web.Models.Entities;
 
 namespace ContosoUniversity.Web.Data;
 
-public class SchoolDbInitialiser
+public static class SchoolDbInitialiser
 {
     public static void Initialise(SchoolDbContext context)
     {
@@ -184,7 +184,7 @@ public class SchoolDbInitialiser
             Title = "Chemistry",
             Credits = 3,
             Department = engineering,
-            Instructors = new List<Instructor> { kapoor, harui }
+            Instructors = [kapoor, harui]
         };
         var microeconomics = new Course
         {
@@ -192,7 +192,7 @@ public class SchoolDbInitialiser
             Title = "Microeconomics",
             Credits = 3,
             Department = economics,
-            Instructors = new List<Instructor> { zheng }
+            Instructors = [zheng]
         };
         var macroeconmics = new Course
         {
@@ -200,7 +200,7 @@ public class SchoolDbInitialiser
             Title = "Macroeconomics",
             Credits = 3,
             Department = economics,
-            Instructors = new List<Instructor> { zheng }
+            Instructors = [zheng]
         };
         var calculus = new Course
         {
@@ -208,7 +208,7 @@ public class SchoolDbInitialiser
             Title = "Calculus",
             Credits = 4,
             Department = mathematics,
-            Instructors = new List<Instructor> { fakhouri }
+            Instructors = [fakhouri]
         };
         var trigonometry = new Course
         {
@@ -216,7 +216,7 @@ public class SchoolDbInitialiser
             Title = "Trigonometry",
             Credits = 4,
             Department = mathematics,
-            Instructors = new List<Instructor> { harui }
+            Instructors = [harui]
         };
         var composition = new Course
         {
@@ -224,7 +224,7 @@ public class SchoolDbInitialiser
             Title = "Composition",
             Credits = 3,
             Department = english,
-            Instructors = new List<Instructor> { abercrombie }
+            Instructors = [abercrombie]
         };
         var literature = new Course
         {
@@ -232,7 +232,7 @@ public class SchoolDbInitialiser
             Title = "Literature",
             Credits = 4,
             Department = english,
-            Instructors = new List<Instructor> { abercrombie }
+            Instructors = [abercrombie]
         };
 
         var courses = new Course[]

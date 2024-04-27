@@ -53,6 +53,6 @@ public class IndexModel(SchoolDbContext context, IConfiguration configuration) :
         };
 
         var pageSize = _configuration.GetValue("ContosoUniversity:PageSize", 4);
-        Students = await studentsQuery.AsNoTracking().ToPaginatedList(pageIndex ?? 1, pageSize);
+        Students = await studentsQuery.AsNoTracking().ToPaginatedListAsync(pageIndex ?? 1, pageSize);
     }
 }
