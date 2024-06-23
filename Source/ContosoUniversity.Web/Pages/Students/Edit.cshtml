@@ -2,39 +2,35 @@
 @model ContosoUniversity.Web.Pages.Students.EditModel
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = $"Edit Student - {Model.Student.FirstMidName} {Model.Student.LastName}";
 }
 
-<h1>Edit</h1>
+<h1>Edit Student&nbsp;<small class="text-body-secondary">@Model.Student.FirstMidName @Model.Student.LastName</small></h1>
 
-<h4>Student</h4>
-<hr />
-<div class="row">
+<form method="post" class="row">
     <div class="col-md-4">
-        <form method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Student.StudentId" />
-            <div class="form-group">
-                <label asp-for="Student.LastName" class="control-label"></label>
-                <input asp-for="Student.LastName" class="form-control" />
-                <span asp-validation-for="Student.LastName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Student.FirstMidName" class="control-label"></label>
-                <input asp-for="Student.FirstMidName" class="form-control" />
-                <span asp-validation-for="Student.FirstMidName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Student.EnrollmentDate" class="control-label"></label>
-                <input asp-for="Student.EnrollmentDate" class="form-control" />
-                <span asp-validation-for="Student.EnrollmentDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="Student.StudentId" />
+        <div class="mb-3">
+            <label asp-for="Student.LastName" class="control-label"></label>
+            <input asp-for="Student.LastName" class="form-control" />
+            <span asp-validation-for="Student.LastName" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Student.FirstMidName" class="control-label"></label>
+            <input asp-for="Student.FirstMidName" class="form-control" />
+            <span asp-validation-for="Student.FirstMidName" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Student.EnrollmentDate" class="control-label"></label>
+            <input asp-for="Student.EnrollmentDate" class="form-control" />
+            <span asp-validation-for="Student.EnrollmentDate" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <input type="submit" value="Save" class="btn btn-primary" />
+        </div>
     </div>
-</div>
+</form>
 
 <div>
     <a asp-page="./Index">Back to List</a>

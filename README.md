@@ -1,4 +1,7 @@
 # Contoso University
+
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=jamescoxhead_contoso-university&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=jamescoxhead_contoso-university)
+
 Sandbox application for testing patterns, libraries, tools, etc. Based on the [Contoso University](https://learn.microsoft.com/en-us/aspnet/core/data/ef-rp/intro?view=aspnetcore-8.0&tabs=visual-studio) tutorial application by Microsoft.
 
 ## Getting started

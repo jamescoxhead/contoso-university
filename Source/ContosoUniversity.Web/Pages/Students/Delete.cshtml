@@ -2,44 +2,42 @@
 @model ContosoUniversity.Web.Pages.Students.DeleteModel
 
 @{
-    ViewData["Title"] = "Delete";
+    ViewData["Title"] = $"Delete Student - {Model.Student.FirstMidName} {Model.Student.LastName}";
 }
 
-<h1>Delete</h1>
+<h1>Delete Student&nbsp;<small class="text-body-secondary">@Model.Student.FirstMidName @Model.Student.LastName</small></h1>
 
 @if (!string.IsNullOrEmpty(Model.ErrorMessage))
 {
     <p class="text-danger">@Model.ErrorMessage</p>
 }
 
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>Student</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Student.LastName)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Student.LastName)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Student.FirstMidName)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Student.FirstMidName)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Student.EnrollmentDate)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Student.EnrollmentDate)
-        </dd>
-    </dl>
+<h3>Are you sure you want to delete this student??</h3>
+
+<dl class="row">
+    <dt class="col-sm-2">
+        @Html.DisplayNameFor(model => model.Student.LastName)
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.Student.LastName)
+    </dd>
+    <dt class="col-sm-2">
+        @Html.DisplayNameFor(model => model.Student.FirstMidName)
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.Student.FirstMidName)
+    </dd>
+    <dt class="col-sm-2">
+        @Html.DisplayNameFor(model => model.Student.EnrollmentDate)
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.Student.EnrollmentDate)
+    </dd>
+</dl>
     
-    <form method="post">
-        <input type="hidden" asp-for="Student.StudentId" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-page="./Index">Back to List</a>
-    </form>
-</div>
+<form method="post">
+    <input type="hidden" asp-for="Student.StudentId" />
+    <input type="submit" value="Delete" class="btn btn-danger" /> |
+    <a asp-page="./Index">Back to List</a>
+</form>
+

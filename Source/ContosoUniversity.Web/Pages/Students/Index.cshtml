@@ -14,17 +14,21 @@
 </p>
 
 <form asp-page="./Index" method="get">
-    <div class="form-actions no-color">
-        <p>
-            Find by name:
-            <input type="text" name="SearchString" value="@Model.CurrentFilter" />
-            <input type="submit" value="Search" class="btn btn-primary" /> |
+    <div class="row row-cols-lg-auto align-items-center">
+        <div class="col-12">
+            <label class="visually-hidden" for="SearchString">Find by name</label>
+            <div class="input-group">
+                <input type="text" name="SearchString" id="SearchString" class="form-control" placeholder="Find by name" value="@Model.CurrentFilter" />
+                <button class="btn btn-outline-primary" type="submit">Search</button>
+            </div>
+        </div>
+        <div class="col-12">
             <a asp-page="./Index">Back to full List</a>
-        </p>
+        </div>
     </div>
 </form>
 
-<table class="table">
+<table class="table table-hover">
     <thead>
         <tr>
             <th>

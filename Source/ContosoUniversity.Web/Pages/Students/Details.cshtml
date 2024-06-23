@@ -2,42 +2,42 @@
 @model ContosoUniversity.Web.Pages.Students.DetailsModel
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = $"Student Details - {Model.Student.FirstMidName} {Model.Student.LastName}";
 }
 
-<h1>Details</h1>
+<h1>Details&nbsp;<small class="text-body-secondary">@Model.Student.FirstMidName @Model.Student.LastName</small></h1>
 
-<div>
-    <h4>Student</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Student.LastName)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Student.LastName)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Student.FirstMidName)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Student.FirstMidName)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Student.EnrollmentDate)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Student.EnrollmentDate)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Student.Enrollments)
-        </dt>
-        <dd class="col-sm-10">
-            <table class="table">
+<dl class="row">
+    <dt class="col-sm-2">
+        @Html.DisplayNameFor(model => model.Student.LastName)
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.Student.LastName)
+    </dd>
+    <dt class="col-sm-2">
+        @Html.DisplayNameFor(model => model.Student.FirstMidName)
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.Student.FirstMidName)
+    </dd>
+    <dt class="col-sm-2">
+        @Html.DisplayNameFor(model => model.Student.EnrollmentDate)
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.Student.EnrollmentDate)
+    </dd>
+    <dt class="col-sm-2">
+        @Html.DisplayNameFor(model => model.Student.Enrollments)
+    </dt>
+    <dd class="col-sm-10">
+        <table class="table table-hover">
+            <thead>
                 <tr>
                     <th>Course Title</th>
                     <th>Grade</th>
                 </tr>
+            </thead>
+            <tbody>
                 @foreach (var item in Model.Student.Enrollments)
                 {
                     <tr>
@@ -49,10 +49,10 @@
                         </td>
                     </tr>
                 }
-            </table>
-        </dd>
-    </dl>
-</div>
+            <tbody>
+        </table>
+    </dd>
+</dl>
 <div>
     <a asp-page="./Edit" asp-route-id="@Model.Student.StudentId">Edit</a> |
     <a asp-page="./Index">Back to List</a>

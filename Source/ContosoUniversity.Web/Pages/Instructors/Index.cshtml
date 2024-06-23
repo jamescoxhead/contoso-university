@@ -10,7 +10,8 @@
 <p>
     <a asp-page="Create">Create New</a>
 </p>
-<table class="table">
+
+<table class="table table-hover">
     <thead>
         <tr>
             <th>Last Name</th>
@@ -65,37 +66,41 @@
 @if (Model.InstructorData.Courses != null)
 {
     <h3>Courses Taught by Selected Instructor</h3>
-    <table class="table">
-        <tr>
-            <th></th>
-            <th>Number</th>
-            <th>Title</th>
-            <th>Department</th>
-        </tr>
-
-        @foreach (var item in Model.InstructorData.Courses)
-        {
-            string selectedRow = "";
-            if (item.CourseId == Model.CourseId)
-            {
-                selectedRow = "table-success";
-            }
-            <tr class="@selectedRow">
-                <td>
-                    <a asp-page="./Index" asp-route-courseID="@item.CourseId">Select</a>
-                </td>
-                <td>
-                    @item.CourseId
-                </td>
-                <td>
-                    @item.Title
-                </td>
-                <td>
-                    @item.Department.Name
-                </td>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th></th>
+                <th>Number</th>
+                <th>Title</th>
+                <th>Department</th>
             </tr>
-        }
-
+        </thead>
+        
+        <tbody>
+            @foreach (var item in Model.InstructorData.Courses)
+            {
+                string selectedRow = "";
+                if (item.CourseId == Model.CourseId)
+                {
+                    selectedRow = "table-success";
+                }
+                <tr class="@selectedRow">
+                    <td>
+                        <a asp-page="./Index" asp-route-courseID="@item.CourseId">Select</a>
+                    </td>
+                    <td>
+                        @item.CourseId
+                    </td>
+                    <td>
+                        @item.Title
+                    </td>
+                    <td>
+                        @item.Department.Name
+                    </td>
+                </tr>
+            }
+        </tbody>
+        
     </table>
 }
 
@@ -104,21 +109,26 @@
     <h3>
         Students Enrolled in Selected Course
     </h3>
-    <table class="table">
-        <tr>
-            <th>Name</th>
-            <th>Grade</th>
-        </tr>
-        @foreach (var item in Model.InstructorData.Enrollments)
-        {
+    <table class="table table-hover">
+        <thead>
             <tr>
-                <td>
-                    @item.Student.FullName
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Grade)
-                </td>
+                <th>Name</th>
+                <th>Grade</th>
             </tr>
-        }
+        </thead>
+
+        <tbody>
+            @foreach (var item in Model.InstructorData.Enrollments)
+            {
+                <tr>
+                    <td>
+                        @item.Student.FullName
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Grade)
+                    </td>
+                </tr>
+            }
+        </tbody>
     </table>
 }
