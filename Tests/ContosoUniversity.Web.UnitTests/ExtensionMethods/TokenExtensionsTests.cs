@@ -12,7 +12,7 @@ public class TokenExtensionsTests
     public void GetLastCharsShouldGetLastBit(string input)
     {
         var byteInput = Encoding.UTF8.GetBytes(input);
-        var expectedValue = byteInput[7].ToString(CultureInfo.CurrentCulture);
+        var expectedValue = byteInput[7].ToString(CultureInfo.InvariantCulture);
 
         var result = byteInput.GetLastChars();
 

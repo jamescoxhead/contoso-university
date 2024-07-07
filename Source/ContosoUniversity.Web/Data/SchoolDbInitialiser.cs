@@ -7,7 +7,7 @@ public static class SchoolDbInitialiser
 {
     public static void Initialise(SchoolDbContext context)
     {
-        var culture = CultureInfo.CreateSpecificCulture("en-GB");
+        var culture = CultureInfo.InvariantCulture;
 
         // Look for any students.
         if (context.Students.Any())
