@@ -1,0 +1,36 @@
+name: contoso-university
+
+services:
+  app:
+    build:
+      context: .
+      target: final
+    ports:
+      - 8080:8080
+    environment:
+      - ConnectionStrings__SchoolDbContext=Server=mssql;Database=ContosoUniversity;User Id=sa;Password=C0nt0s0Un1vers1ty!;TrustServerCertificate=true
+      - DOTNET_ENVIRONMENT=Development
+    depends_on:
+      mssql:
+        condition: service_healthy
+
+  mssql:
+    container_name: mssql
+    build:
+      context: ./Scripts/database
+    environment:
+      ACCEPT_EULA: "Y"
+      SA_PASSWORD: "C0nt0s0Un1vers1ty!"
+      MSSQL_PID: Developer
+    restart: always
+    healthcheck:
+      test: ["CMD-SHELL", "/opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P C0nt0s0Un1vers1ty! -Q 'SELECT 1' || exit 1"]
+      interval: 10s
+      retries: 5
+      timeout: 3s
+      start_period: 60s
+    volumes:
+      - db-data:/var/opt/mssql/data
+
+volumes:
+  db-data:

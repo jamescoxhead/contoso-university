@@ -7,7 +7,7 @@ Sandbox application for testing patterns, libraries, tools, etc. Based on the [C
 ## Getting started
 This application requires .NET 8. The database uses [SQL Server LocalDB](https://learn.microsoft.com/en-us/sql/database-engine/configure-windows/sql-server-express-localdb?view=sql-server-ver16) which only runs on Windows.
 
-To run the application, either run the *ContosoUniversity.Web* project from Visual Studio, or from your command line go to the *src/ContosoUniversity.Web* folder and run `dotnet run`.
+To run the application, either run the *ContosoUniversity.Web* project from Visual Studio, or from your command line go to the *src/ContosoUniversity.Web* folder and run `dotnet run`. Alternatively, you can build and run the application using Docker Compose - `docker compose up --build`
 
 ## Workflow
 This project tries to follow [Trunk-based development](https://trunkbaseddevelopment.com/). Small changes in the main branch are fine if they do not break the build. Larger changes and external contributions should be in a feature branch off of the main branch. External contributions are merged in via a pull request.

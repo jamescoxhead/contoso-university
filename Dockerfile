@@ -23,9 +23,9 @@ RUN dotnet restore ./Source/ContosoUniversity.Web/ContosoUniversity.Web.csproj
 COPY . .
 RUN dotnet build ./Source/ContosoUniversity.Web/ContosoUniversity.Web.csproj -o /app --no-restore
 
-FROM build as publish
+FROM build AS publish
 RUN dotnet publish ./Source/ContosoUniversity.Web/ContosoUniversity.Web.csproj -o /publish --no-restore
 
-FROM base as final
+FROM base AS final
 COPY --from=publish /publish .
 ENTRYPOINT [ "./ContosoUniversity.Web" ]
