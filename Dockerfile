@@ -10,8 +10,8 @@ RUN apk update && \
     apk add --no-cache icu-data-full icu-libs
 USER app
 WORKDIR /app
-ENV ASPNETCORE_URLS=http://+:8080/
 EXPOSE 8080
+EXPOSE 8081
 
 FROM mcr.microsoft.com/dotnet/sdk:${BASE_VERSION} AS build
 WORKDIR /source

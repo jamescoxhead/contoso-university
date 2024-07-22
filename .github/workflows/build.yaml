@@ -1,15 +1,22 @@
 name: build
 
 on:
-  push:
+  pull_request:
     branches:
       - main
     paths-ignore:
-      - .editorconfig
-      - .gitattributes
+      - 'Scripts/**'
       - .gitignore
+      - CODE_OF_CONDUCT.md
+      - LICENSE
       - README.md
-      - LICENCE
+
+  workflow_call:
+    inputs:
+      publish:
+        type: boolean
+        default: false
+        description: Publish build artifacts?
 
 env:
   DOTNET_VERSION: 8.x
@@ -41,20 +48,22 @@ jobs:
         run: dotnet restore
 
       - name: Build solution
-        run: dotnet build --configuration ${{env.BUILD_CONFIGURATON}} --no-restore
+        run: dotnet build --configuration ${{ env.BUILD_CONFIGURATON }} --no-restore
 
       - name: Run tests
-        run: dotnet test --no-build --configuration ${{env.BUILD_CONFIGURATON}} --verbosity normal --settings coverlet.runsettings --results-directory ./coverage
+        run: dotnet test --no-build --configuration ${{ env.BUILD_CONFIGURATON }} --verbosity normal --settings coverlet.runsettings --results-directory ./coverage
 
       - name: Publish Application
+        if: ${{ inputs.publish == true }}
         run: |
-          dotnet publish --configuration ${{env.BUILD_CONFIGURATON}} --self-contained --output ./publish
+          dotnet publish --configuration ${{ env.BUILD_CONFIGURATON }} --self-contained --output ./publish
           cd publish
           zip -r ./publish.zip .
-        working-directory: ./Source/${{env.PROJECT_NAME}}.Web
+        working-directory: ./Source/${{ env.PROJECT_NAME }}.Web
 
       - name: Upload Artifact
+        if: ${{ inputs.publish == true }}
         uses: actions/upload-artifact@v4
         with:
           name: application
-          path: ./Source/${{env.PROJECT_NAME}}.Web/publish/publish.zip
+          path: ./Source/${{ env.PROJECT_NAME }}.Web/publish/publish.zip
