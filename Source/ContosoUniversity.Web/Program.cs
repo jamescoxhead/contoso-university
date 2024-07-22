@@ -9,6 +9,8 @@ builder.Services.AddDbContext<SchoolDbContext>(options =>
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 var app = builder.Build();
+app.Logger.LogInformation("Starting up...");
+app.Logger.LogInformation("Environment: {Environment}", app.Environment.EnvironmentName);
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -27,7 +29,17 @@ using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
     var dbContext = services.GetRequiredService<SchoolDbContext>();
+
+    if (app.Environment.IsDevelopment() && (await dbContext.Database.GetPendingMigrationsAsync()).Any())
+    {
+        app.Logger.LogInformation("Running database migrations...");
+        await dbContext.Database.MigrateAsync();
+        app.Logger.LogInformation("Database migrations complete");
+    }
+
+    app.Logger.LogInformation("Initialising database...");
     SchoolDbInitialiser.Initialise(dbContext);
+    app.Logger.LogInformation("Database initialised");
 }
 
 app.UseHttpsRedirection();
