@@ -30,10 +30,10 @@ using (var scope = app.Services.CreateScope())
     var services = scope.ServiceProvider;
     var dbContext = services.GetRequiredService<SchoolDbContext>();
 
-    if (app.Environment.IsDevelopment() && dbContext.Database.GetPendingMigrations().Any())
+    if (app.Environment.IsDevelopment() && (await dbContext.Database.GetPendingMigrationsAsync()).Any())
     {
         app.Logger.LogInformation("Running database migrations...");
-        dbContext.Database.Migrate();
+        await dbContext.Database.MigrateAsync();
         app.Logger.LogInformation("Database migrations complete");
     }
 

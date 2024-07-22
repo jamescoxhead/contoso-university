@@ -8,7 +8,7 @@ services:
     ports:
       - 8080:8080
     environment:
-      - ConnectionStrings__SchoolDbContext=Server=mssql;Database=ContosoUniversity;User Id=sa;Password=C0nt0s0Un1vers1ty!;TrustServerCertificate=true
+      - ConnectionStrings__SchoolDbContext=Server=mssql;Database=ContosoUniversity;User Id=sa;Password=${DATABASE_PASSWORD};TrustServerCertificate=true
       - DOTNET_ENVIRONMENT=Development
     depends_on:
       mssql:
@@ -24,7 +24,7 @@ services:
       MSSQL_PID: Developer
     restart: always
     healthcheck:
-      test: ["CMD-SHELL", "/opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P C0nt0s0Un1vers1ty! -Q 'SELECT 1' || exit 1"]
+      test: ["CMD-SHELL", "/opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P ${DATABASE_PASSWORD} -Q 'SELECT 1' || exit 1"]
       interval: 10s
       retries: 5
       timeout: 3s
