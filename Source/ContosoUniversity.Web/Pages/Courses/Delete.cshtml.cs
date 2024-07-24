@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using ContosoUniversity.Web.Models.Entities;
 using ContosoUniversity.Web.Data;
+using ContosoUniversity.Domain.Entities;
 
 namespace ContosoUniversity.Web.Pages.Courses;
 

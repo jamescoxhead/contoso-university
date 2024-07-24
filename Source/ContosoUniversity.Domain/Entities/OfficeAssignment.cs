@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace ContosoUniversity.Web.Models.Entities;
+namespace ContosoUniversity.Domain.Entities;
 
 public class OfficeAssignment
 {

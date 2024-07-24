@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 
-namespace ContosoUniversity.Web.Models.Entities;
+namespace ContosoUniversity.Domain.Entities;
 
 public class Department
 {
@@ -26,5 +26,5 @@ public class Department
     public byte[] RowVersion { get; set; } = default!;
 
     public Instructor Administrator { get; set; } = default!;
-    public ICollection<Course> Courses { get; set; } = new List<Course>();
+    public ICollection<Course> Courses { get; set; } = [];
 }

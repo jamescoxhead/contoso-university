@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
-using ContosoUniversity.Web.Models.Entities;
 using ContosoUniversity.Web.Data;
+using ContosoUniversity.Domain.Entities;
 
 namespace ContosoUniversity.Web.Pages.Courses;
 
@@ -26,7 +26,7 @@ public class CreateModel(SchoolDbContext context) : BaseCoursePageModel
             return Page();
         }
 
-        var createCourse = new Course { Title = string.Empty};
+        var createCourse = new Course { Title = string.Empty };
 
         if (await TryUpdateModelAsync(createCourse,
                                       "course",

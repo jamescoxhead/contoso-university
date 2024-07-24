@@ -1,11 +1,7 @@
 using System.ComponentModel.DataAnnotations;
+using ContosoUniversity.Domain.Enums;
 
-namespace ContosoUniversity.Web.Models.Entities;
-
-public enum Grade
-{
-    A, B, C, D, F
-}
+namespace ContosoUniversity.Domain.Entities;
 
 public class Enrollment
 {

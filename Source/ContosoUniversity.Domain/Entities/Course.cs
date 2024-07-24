@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace ContosoUniversity.Web.Models.Entities;
+namespace ContosoUniversity.Domain.Entities;
 
 public class Course
 {
@@ -18,6 +18,6 @@ public class Course
     public int DepartmentId { get; set; }
 
     public Department Department { get; set; } = default!;
-    public ICollection<Enrollment> Enrollments { get; set; } = new List<Enrollment>();
-    public ICollection<Instructor> Instructors { get; set; } = new List<Instructor>();
+    public ICollection<Enrollment> Enrollments { get; set; } = [];
+    public ICollection<Instructor> Instructors { get; set; } = [];
 }

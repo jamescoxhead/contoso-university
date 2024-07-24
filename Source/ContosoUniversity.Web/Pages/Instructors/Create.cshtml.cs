@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using ContosoUniversity.Web.Models.Entities;
+using ContosoUniversity.Domain.Entities;
 using ContosoUniversity.Web.Data;
 using Microsoft.EntityFrameworkCore;
 using System.Globalization;

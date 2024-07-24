@@ -1,5 +1,6 @@
 using System.Globalization;
-using ContosoUniversity.Web.Models.Entities;
+using ContosoUniversity.Domain.Entities;
+using ContosoUniversity.Domain.Enums;
 
 namespace ContosoUniversity.Web.Data;
 

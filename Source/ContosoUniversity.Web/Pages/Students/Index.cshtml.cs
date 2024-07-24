@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using ContosoUniversity.Web.Data;
-using ContosoUniversity.Web.Models.Entities;
+using ContosoUniversity.Domain.Entities;
 using ContosoUniversity.Web.Models.ViewModels;
 using ContosoUniversity.Web.ExtensionMethods;
 
