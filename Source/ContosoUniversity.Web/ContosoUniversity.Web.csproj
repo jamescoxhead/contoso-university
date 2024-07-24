@@ -19,4 +19,8 @@
   <ItemGroup>
     <Folder Include="wwwroot\lib\yeti\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\ContosoUniversity.Infrastructure\ContosoUniversity.Infrastructure.csproj" />
+    <ProjectReference Include="..\ContosoUniversity.Application\ContosoUniversity.Application.csproj" />
+  </ItemGroup>
 </Project>

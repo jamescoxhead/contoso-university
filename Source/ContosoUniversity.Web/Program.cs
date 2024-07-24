@@ -1,9 +1,12 @@
 using Microsoft.EntityFrameworkCore;
 using ContosoUniversity.Web.Data;
+using ContosoUniversity.Web;
+using ContosoUniversity.Domain;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddRazorPages();
+builder.Services.AddWebServices();
+builder.Services.AddDomainServices();
 builder.Services.AddDbContext<SchoolDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("SchoolDbContext") ?? throw new InvalidOperationException("Connection string 'SchoolDbContext' not found.")));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
@@ -51,4 +54,4 @@ app.UseAuthorization();
 
 app.MapRazorPages();
 
-app.Run();
+await app.RunAsync();
